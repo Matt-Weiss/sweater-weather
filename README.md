@@ -1,24 +1,22 @@
-# README
+# Sweater Weather
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the final project for Mod 3 at Turing School. The project is to build out an API and other functionality to mimic a weather delivery app like Yahoo Weather.
 
-Things you may want to cover:
+### Versions:
 
-* Ruby version
+* Ruby - 2.4.1
+* Rails - 5.2.3
 
-* System dependencies
+System dependencies
 
-* Configuration
+Configuration
 
-* Database creation
+Database creation
 
-* Database initialization
+Database initialization
 
-* How to run the test suite
+How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...
+Deployment instructions
