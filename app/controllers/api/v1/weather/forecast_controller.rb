@@ -1,8 +1,12 @@
 class Api::V1::Weather::ForecastController < ApplicationController
 
   def show
-    render json: {test: "test"}
-    #ForecastSerializer.new(Forecast.find_or_create_by(search_params))
+    weather = Location.find_by(city_state: search_params[:location])
+    if weather
+      render json: weather.to_json
+    else
+      Forecast.new(search_params[:location])
+    end
   end
 
 
