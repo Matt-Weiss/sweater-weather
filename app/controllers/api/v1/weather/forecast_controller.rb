@@ -13,8 +13,8 @@ class Api::V1::Weather::ForecastController < ApplicationController
   private
 
   def get_weather(location)
-    location = LocationService.new(location).parse_location
-    weather = ForecastService.new(location)
+    updated_location = LocationService.new(location).parse_location
+    weather = ForecastService.new(updated_location)
     weather.get_forecast
   end
 
