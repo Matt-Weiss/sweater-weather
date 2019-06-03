@@ -14,6 +14,6 @@ describe 'Antipode Service' do
                                  latitude: "22.3193039",
                                 longitude: "114.1693611")
     antipode = AntipodeService.new(location)
-    expect(antipode.find_antipode).to eq(expected_return)
+    expect(antipode.get_json).to eq(expected_return)
   end
 end
