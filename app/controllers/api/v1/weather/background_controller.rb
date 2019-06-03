@@ -13,8 +13,8 @@ class Api::V1::Weather::BackgroundController < ApplicationController
   private
 
   def get_background(location)
-    location_info = LocationService.new(location).parse_location
-    background = BackgroundService.new(location_info)
+    location = LocationService.new(location).parse_location
+    background = BackgroundService.new(location)
     background.update_backgrounds
   end
 

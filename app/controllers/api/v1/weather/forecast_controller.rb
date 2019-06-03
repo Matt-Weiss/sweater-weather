@@ -5,7 +5,7 @@ class Api::V1::Weather::ForecastController < ApplicationController
     if location.forecast
       render json: WeatherSerializer.new(location)
     else
-      location = get_weather(search_params[:location])
+      get_weather(location)
       render json: WeatherSerializer.new(location)
     end
   end
@@ -13,8 +13,8 @@ class Api::V1::Weather::ForecastController < ApplicationController
   private
 
   def get_weather(location)
-    location_info = LocationService.new(location).parse_location
-    weather = ForecastService.new(location_info)
+    location = LocationService.new(location).parse_location
+    weather = ForecastService.new(location)
     weather.get_forecast
   end
 
