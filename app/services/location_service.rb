@@ -12,6 +12,17 @@ class LocationService
     @location
   end
 
+  def antipode_data
+    location_info = get_json[:results][0]
+    city_state = location_info[:address_components].first[:long_name].downcase.gsub(" ", "")
+    country = location_info[:address_components].last[:long_name]
+
+    Location.create(city_state: city_state,
+                       country: country,
+                      latitude: @location[:lat],
+                     longitude: @location[:long])
+  end
+
   def get_json
     response ||= conn.get
     JSON.parse(response.body, symbolize_names: true)
@@ -20,7 +31,11 @@ class LocationService
   private
 
   def conn
-    Faraday.new("https://maps.googleapis.com/maps/api/geocode/json?key=#{ENV["GOOGLE_API_KEY"]}&address=#{@location[:city_state]}")
+    if @location[:city_state]
+      Faraday.new("https://maps.googleapis.com/maps/api/geocode/json?key=#{ENV["GOOGLE_API_KEY"]}&address=#{@location[:city_state]}")
+    else
+      Faraday.new("https://maps.googleapis.com/maps/api/geocode/json?key=#{ENV["GOOGLE_API_KEY"]}&latlng=#{@location[:lat]},#{@location[:long]}")
+    end
   end
 
 end
