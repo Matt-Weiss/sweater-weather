@@ -1,6 +1,6 @@
 class WeatherSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :city_state, :country
+  attributes :formatted_address, :country
 
   attribute :forecast do |object|
     current_forecast = object.forecast["currently"]
@@ -8,7 +8,7 @@ class WeatherSerializer
     hourly_forecast = object.forecast["hourly"]["data"]
     todays_forecast = object.forecast["daily"]["data"][0]
     daily_forecast = object.forecast["daily"]["data"]
-    
+
     object.forecast = {currently: {
                                time: Time.at(current_forecast["time"]),
                      glance_summary: current_forecast["summary"],

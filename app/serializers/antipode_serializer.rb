@@ -10,8 +10,8 @@ class AntipodeSerializer
            current_temperature: object.forecast["currently"]["temperature"]
                       }
   end
-  
+
   attribute :search_location do |object, params|
-    params[:original_location].city_state
+    params[:original_location].formatted_address
   end
 end
