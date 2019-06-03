@@ -1,6 +1,6 @@
 # Sweater Weather
 
-This is the final project for Mod 3 at Turing School. The project is to build out an API and other functionality to mimic a weather delivery app like Yahoo Weather.
+This is the final project for Mod 3 at Turing School. The project is to build out an API and other functionality to mimic a weather delivery app like Yahoo Weather. This project is deployed at https://desolate-cove-69994.herokuapp.com/
 
 ### Versions:
 
