@@ -14,6 +14,8 @@ class Api::V1::Weather::AntipodeController < ApplicationController
 
   def get_antipode(location)
     location = LocationService.new(location).parse_location
-    binding.pry
+    antipode = AntipodeService.new(location)
+    antipode.find_antipode
+    # binding.pry
   end
 end
