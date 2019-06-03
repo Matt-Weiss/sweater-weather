@@ -14,7 +14,7 @@ class LocationService
 
   def antipode_data
     location_info = get_json[:results][0]
-    city_state = location_info[:address_components].first[:long_name].downcase.gsub(" ", "")
+    city_state = location_info[:address_components].first[:long_name]
     country = location_info[:address_components].last[:long_name]
 
     Location.create(city_state: city_state,
