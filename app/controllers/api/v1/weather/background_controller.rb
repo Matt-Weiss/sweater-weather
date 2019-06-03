@@ -5,8 +5,8 @@ class Api::V1::Weather::BackgroundController < ApplicationController
     if location.background_url
       render json: BackgroundSerializer.new(location)
     else
-      background = get_background(search_params[:location])
-      render json: BackgroundSerializer.new(background)
+      get_background(location)
+      render json: BackgroundSerializer.new(location)
     end
   end
 

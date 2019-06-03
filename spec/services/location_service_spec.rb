@@ -77,9 +77,9 @@ describe LocationService do
         ],
         "status": "OK"
     }
-
-      location = LocationService.new('denver,co')
-      expect(location.get_json).to eq(expected_response)
+      location = Location.create(city_state: 'denver,co')
+      location_info = LocationService.new(location)
+      expect(location_info.get_json).to eq(expected_response)
     end
 
     it 'parse_location' do
@@ -88,8 +88,9 @@ describe LocationService do
                              "latitude": "39.7392358",
                             "longitude": "-104.990251"}
 
-      location = LocationService.new('denver,co')
-      expect(location.parse_location).to eq(expected_response)
+      location = Location.create(city_state: 'denver,co')
+      location_info = LocationService.new(location)
+      expect(location_info.parse_location).to eq(expected_response)
     end
   end
 end
