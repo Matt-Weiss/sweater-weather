@@ -5,9 +5,8 @@ class BackgroundService
   end
 
   def update_backgrounds
-    location = Location.find_by(city_state: @location[:city_state])
-    location.update(background_url: get_urls)
-    location
+    @location.update(background_url: get_urls)
+    @location
   end
 
   def get_urls

@@ -6,12 +6,8 @@ class ForecastService
   end
 
   def get_forecast
-    location = Location.find_by(city_state: @location[:city_state])
-    location.update(country: @location[:country],
-                   latitude: @location[:latitude],
-                  longitude: @location[:longitude],
-                   forecast: get_json)
-    location
+    @location.update(forecast: get_json)
+    @location
   end
 
   def get_json

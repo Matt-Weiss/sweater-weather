@@ -5,13 +5,11 @@ class LocationService
   end
 
   def parse_location
-    location_detail = {}
     location_info = get_json[:results][0]
-    location_detail[:city_state] = "#{location_info[:address_components][0][:short_name].downcase},#{location_info[:address_components][2][:short_name].downcase}"
-    location_detail[:country] = location_info[:address_components][3][:long_name]
-    location_detail[:latitude] = location_info[:geometry][:location][:lat].to_s
-    location_detail[:longitude] = location_info[:geometry][:location][:lng].to_s
-    location_detail
+    @location.update(country: location_info[:address_components].last[:long_name],
+                    latitude: location_info[:geometry][:location][:lat].to_s,
+                   longitude: location_info[:geometry][:location][:lng].to_s)
+    @location
   end
 
   def get_json
@@ -22,7 +20,7 @@ class LocationService
   private
 
   def conn
-    Faraday.new("https://maps.googleapis.com/maps/api/geocode/json?key=#{ENV["GOOGLE_API_KEY"]}&address=#{@location}")
+    Faraday.new("https://maps.googleapis.com/maps/api/geocode/json?key=#{ENV["GOOGLE_API_KEY"]}&address=#{@location[:city_state]}")
   end
 
 end
