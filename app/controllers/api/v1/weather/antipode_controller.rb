@@ -2,7 +2,8 @@ class Api::V1::Weather::AntipodeController < ApplicationController
 
   def show
     location = Location.find_or_create_by(city_state: search_params[:loc])
-    get_antipode(location)
+    weather = get_antipode_weather(location)
+    render json: AntipodeSerializer.new(weather, {params: {original_location: location}})
   end
 
 
@@ -16,6 +17,10 @@ class Api::V1::Weather::AntipodeController < ApplicationController
     location = LocationService.new(location).parse_location
     antipode = AntipodeService.new(location)
     antipode.find_antipode
-    # binding.pry
+  end
+
+  def get_antipode_weather(location)
+    weather = ForecastService.new(get_antipode(location))
+    weather.get_forecast
   end
 end
