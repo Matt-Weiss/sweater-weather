@@ -7,23 +7,41 @@ RSpec.describe Favorite, type: :request do
       user = User.create(email: "email@test.com",
                       password: "password")
 
-      post "/api/v1/favorites", :params => {location: "denver,co",
+      post "/api/v1/sessions", :params => {email: "email@test.com",
+                                        password: "password"}
+
+      location = Location.create(city_state: "denver,co",
+                                    country: "United States")
+
+      post "/api/v1/favorites", :params => {location: location.id,
                                         api_key: user.api_key}
 
       json = JSON.parse(response.body, symbolize_names: true)
-      expect(response.status).to eq(200)
+      favorite = Favorite.last
+      expect(favorite.user_id).to eq(user.id)
+      expect(favorite.location_id).to eq(location.id)
+      expect(response.status).to eq(201)
     end
 
-    it 'with a bad api key they get a 401' do
+    it 'with a bad api key get a 401 error' do
 
       user = User.create(email: "email@test.com",
                       password: "password")
 
-      post "/api/v1/favorites", :params => {location: "denver,co",
-                                        api_key: user.api_key}
+      post "/api/v1/sessions", :params => {email: "email@test.com",
+                                        password: "password"}
+
+      location = Location.create(city_state: "denver,co",
+                                    country: "United States")
+
+      post "/api/v1/favorites", :params => {location: location.id,
+                                        api_key: "123"}
 
       json = JSON.parse(response.body, symbolize_names: true)
+
       expect(response.status).to eq(401)
     end
+
+
   end
 end
