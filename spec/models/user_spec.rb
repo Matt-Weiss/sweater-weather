@@ -5,7 +5,7 @@ RSpec.describe User, type: :request do
 
     post "/api/v1/users", :params => {email: "email@test.com",
                                    password: "password"}
-# binding.pry
+
     json = JSON.parse(response.body, symbolize_names: true)
     expect(response.status).to eq(201)
     expect(json[:api_key]).to_not eq(nil)
@@ -18,7 +18,7 @@ RSpec.describe User, type: :request do
 
     post "/api/v1/sessions", :params => {email: "email@test.com",
                                       password: "password"}
-# binding.pry
+
     json = JSON.parse(response.body, symbolize_names: true)
     expect(response.status).to eq(200)
     expect(json[:api_key]).to_not eq(nil)
