@@ -10,4 +10,13 @@ class Api::V1::FavoriteController < BaseAPIController
     end
   end
 
+  def index
+    if valid_user?
+      favorites = User.includes(:locations).find(session[:user_id]).locations
+      render json:  FavoriteSerializer.new(favorites).favorites
+    else
+      render json: {error: "Incorrect api_key"}, status: 401
+    end
+  end
+
 end
