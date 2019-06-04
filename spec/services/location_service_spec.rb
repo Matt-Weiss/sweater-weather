@@ -83,14 +83,12 @@ describe LocationService do
     end
 
     it 'parse_location' do
-      expected_response = {"city_state": "denver,co",
-                              "country": "United States",
-                             "latitude": "39.7392358",
-                            "longitude": "-104.990251"}
-
       location = Location.create(city_state: 'denver,co')
-      location_info = LocationService.new(location)
-      expect(location_info.parse_location).to eq(expected_response)
+      location_info = LocationService.new(location).parse_location
+      expect(location_info.city_state).to eq("denver,co")
+      expect(location_info.country).to eq("United States")
+      expect(location_info.latitude).to eq("39.7392358")
+      expect(location_info.longitude).to eq("-104.990251")
     end
   end
 end
