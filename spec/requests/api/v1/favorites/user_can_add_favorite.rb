@@ -21,6 +21,7 @@ RSpec.describe Favorite, type: :request do
       expect(favorite.user_id).to eq(user.id)
       expect(favorite.location_id).to eq(location.id)
       expect(response.status).to eq(201)
+
     end
 
     it 'with a bad api key get a 401 error' do
@@ -36,8 +37,6 @@ RSpec.describe Favorite, type: :request do
 
       post "/api/v1/favorites", :params => {location: location.id,
                                         api_key: "123"}
-
-      json = JSON.parse(response.body, symbolize_names: true)
 
       expect(response.status).to eq(401)
     end
