@@ -13,7 +13,7 @@ class Api::V1::FavoriteController < BaseAPIController
   def index
     if valid_user?
       favorites = User.includes(:locations).find(session[:user_id]).locations
-      render json:  FavoriteSerializer.new(favorites).favorites
+      render json:  WeatherSerializer.favorites_forecast(favorites)
     else
       render json: {error: "Incorrect api_key"}, status: 401
     end
@@ -24,7 +24,7 @@ class Api::V1::FavoriteController < BaseAPIController
       location = Favorite.find_by(user_id: session[:user_id], location_id: params[:location])
       location.delete
       favorites = User.includes(:locations).find(session[:user_id]).locations
-      render json:  FavoriteSerializer.new(favorites).favorites
+      render json:  WeatherSerializer.favorites_forecast(favorites)
       #inquire about a redirect
     else
       render json: {error: "Incorrect api_key"}, status: 401

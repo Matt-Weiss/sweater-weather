@@ -20,7 +20,7 @@
 
 /node_modules
 /yarn-error.log
-
+dump.rdb
 /public/assets
 .byebug_history
 

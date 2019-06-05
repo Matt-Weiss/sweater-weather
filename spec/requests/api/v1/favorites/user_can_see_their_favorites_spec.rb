@@ -27,12 +27,11 @@ RSpec.describe Favorite, type: :request do
       get "/api/v1/favorites", :params => { api_key: user.api_key}
 
       json = JSON.parse(response.body, symbolize_names: true)
-
       expect(response.status).to eq(200)
       expect(response.body).to include("denver,co")
     end
 
-    it 'with a proper api key they see their favorites' do
+    it 'with a bad api key they see an error' do
 
       user = User.create(email: "email@test.com",
                       password: "password")
