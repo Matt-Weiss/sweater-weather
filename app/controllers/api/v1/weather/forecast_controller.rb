@@ -1,4 +1,4 @@
-class Api::V1::Weather::ForecastController < ApplicationController
+class Api::V1::Weather::ForecastController < BaseAPIController
 
   def show
     location = Location.find_or_create_by(city_state: search_params[:location])
