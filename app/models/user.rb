@@ -3,4 +3,5 @@ class User < ApplicationRecord
   has_many :locations, through: :favorites
   has_secure_password
   has_secure_token :api_key
+  validates_uniqueness_of :email
 end
