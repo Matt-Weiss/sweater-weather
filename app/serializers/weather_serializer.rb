@@ -9,7 +9,9 @@ class WeatherSerializer
   def self.favorites_forecast(locations)
     @favorites = locations.map do |location|
       forecast = Rails.cache.fetch("location-#{location.id}-forecast", expires_in: 15.minutes) do
-        get_weather(location)
+        location = LocationService.new(location).parse_location
+        weather = LocationForecastRetriever.new(location)
+        weather.get_forecast
       end
       forecast.current_forecast
     end
