@@ -29,6 +29,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
 # Use faraday for HTTP requests
 gem 'faraday'
+gem 'sidekiq'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
