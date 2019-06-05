@@ -22,11 +22,11 @@ class Api::V1::FavoriteController < BaseAPIController
 
   def delete
     if valid_user?
-      location = Favorite.find_by(user_id: session[:user_id], location_id: params[:location])
-      location.delete
+      location = Location.find_or_create_by(city_state: params[:location])
+      favorite = Favorite.find_by(user_id: session[:user_id], location_id: location.id)
+      favorite.delete
       favorites = User.includes(:locations).find(session[:user_id]).locations
       render json:  WeatherSerializer.favorites_forecast(favorites)
-      #inquire about a redirect
     else
       render json: {error: "Incorrect api_key"}, status: 401
     end
